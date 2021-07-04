@@ -1,0 +1,47 @@
+class Solution{
+    public:
+        
+    // arr[]: input array
+    // n: size of array
+    // Function to find the maximum index difference.
+    int maxIndexDiff(int arr[], int n) 
+    { 
+        
+        // Your code here
+        int inc[n];
+        int dec[n];
+        inc[0]=arr[0];
+        dec[n-1]=arr[n-1];
+        
+        for(int i=1;i<n;i++){
+            if(arr[i]<inc[i-1]){
+                inc[i]=arr[i];
+            }
+            else{
+                inc[i]=inc[i-1];
+            }
+        }
+        
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]>dec[i+1]){
+                dec[i]=arr[i];
+            }
+            else{
+                dec[i]=dec[i+1];
+            }
+        }
+        int i=0,j=0,ans=-1;
+        while(i<n && j<n){
+            if(inc[i]<=dec[j]){
+                ans=max(j-i,ans);
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+        
+        return ans;
+        
+    }
+};
